@@ -11,7 +11,7 @@
 #include "connection.hpp"
 #include <iostream>
 #include <list>
-#include <cpr/curl_container.h>
+#include "parameter.hpp"
 
 namespace DigitalLicenseManager {
 
@@ -22,8 +22,9 @@ namespace DigitalLicenseManager {
 
     public:
         explicit Request(Connection connection);
-        Response post(const std::string &path, const std::initializer_list<cpr::Parameter> &data);
-        Response get(const std::string &path, const std::initializer_list<cpr::Parameter> &data);
+        Response post(const std::string &path, const std::initializer_list<Parameter> &data);
+        Response get(const std::string &path, const std::initializer_list<Parameter> &data);
+        static size_t WriteCallback(char *contents, size_t size, size_t nmemb, void *userp);
         std::string endpoint(const std::string &path);
     };
 
