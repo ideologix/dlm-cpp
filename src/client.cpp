@@ -8,6 +8,14 @@ namespace DigitalLicenseManager {
         Connection connection = Connection(base_url, version, consumer_key, consumer_secret);
         return connection;
     }
+    Response licenses_create(Connection &connection, const std::initializer_list<Parameter> &data) {
+        Request request = Request(connection);
+        return request.post("licenses", data);
+    }
+    Response licenses_update(Connection &connection, const std::string &key, const std::initializer_list<Parameter> &data) {
+        Request request = Request(connection);
+        return request.post("licenses/"+key, data);
+    }
     Response licenses_query(Connection &connection) {
         Request request = Request(connection);
         return request.get("licenses", {});

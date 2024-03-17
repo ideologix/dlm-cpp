@@ -73,8 +73,44 @@ namespace DigitalLicenseManager {
      */
     Response Request::post(const std::string &path, const std::initializer_list<Parameter> &data) {
 
+        curl_global_init(CURL_GLOBAL_ALL);
 
-        Response response = Response(1, "");
+        CURL* handle = curl_easy_init();
+
+        struct curl_httppost* post = NULL;
+        struct curl_httppost* last = NULL;
+
+        std::string read_buffer;
+        long http_code;
+
+        for (auto& e : data) {
+            char *value = curl_escape(e.value.c_str(), e.value.length());
+            if(value) {
+                curl_formadd(&post, &last, CURLFORM_COPYNAME, e.key.c_str(), CURLFORM_COPYCONTENTS, value, CURLFORM_END);
+                curl_free(value);
+            }
+        }
+
+        std::string url = this->endpoint(path);
+
+        curl_easy_setopt(handle, CURLOPT_URL, url.c_str());
+        curl_easy_setopt(handle, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_easy_setopt(handle, CURLOPT_USERNAME, this->connection.consumer_key.c_str());
+        curl_easy_setopt(handle, CURLOPT_PASSWORD, this->connection.consumer_secret.c_str());
+
+        curl_easy_setopt(handle, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_easy_setopt(handle, CURLOPT_HTTPPOST, post);
+
+        //curl_easy_setopt(handle, CURLOPT_VERBOSE, 1L);
+        curl_easy_setopt(handle, CURLOPT_WRITEFUNCTION, WriteCallback);
+        curl_easy_setopt(handle, CURLOPT_WRITEDATA, &read_buffer);
+        curl_easy_getinfo(handle, CURLINFO_RESPONSE_CODE, &http_code);
+
+        curl_easy_perform(handle);
+        curl_easy_cleanup(handle);
+        curl_global_cleanup();
+
+        Response response = Response(http_code, read_buffer);
         return response;
     }
 
