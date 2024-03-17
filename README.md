@@ -8,7 +8,7 @@ For more details, please check our [Rest API Documentation](https://docs.codever
 
 ## Dependencies
 
-* Libcpr - This library should be included in your project.
+* Libcurl - This library should be included in your project.
 
 ## License
 
