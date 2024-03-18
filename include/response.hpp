@@ -14,11 +14,11 @@ namespace DigitalLicenseManager {
     class Response {
 
     protected:
-        long status;
+        long status = 0;
         std::string contents;
 
     public:
-        Response();
+        Response() = default;
         Response(const long &status, const std::string &contents);
         long get_status();
         std::string get_contents();

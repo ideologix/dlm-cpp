@@ -1,5 +1,11 @@
-#ifndef DLM_API_CLIENT_H
-#define DLM_API_CLIENT_H
+//
+// Created by darko on 16.3.24.
+// Copyright (C) 2024 Darko Gjorgjijoski.
+// All rights reserved.
+//
+
+#ifndef DLM_CPP_CLIENT_H
+#define DLM_CPP_CLIENT_H
 
 #include "connection.hpp"
 #include "request.hpp"
@@ -16,4 +22,4 @@ namespace DigitalLicenseManager {
     Response licenses_validate(Connection &connection, const std::string &token);
 }
 
-#endif //DLM_API_CLIENT_H
+#endif //DLM_CPP_CLIENT_H

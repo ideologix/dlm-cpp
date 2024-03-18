@@ -1,5 +1,7 @@
 //
-// Created by Darko Gjorgjijoski on 17.3.24.
+// Created by darko on 17.3.24.
+// Copyright (C) 2024 Darko Gjorgjijoski.
+// All rights reserved.
 //
 
 #ifndef DLM_CPP_PARAMETER_H

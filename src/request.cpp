@@ -1,7 +1,13 @@
 //
 // Created by darko on 16.3.24.
+// Copyright (C) 2024 Darko Gjorgjijoski.
+// All rights reserved.
 //
+
 #include "../include/request.hpp"
+
+
+#define CURL_STATICLIB
 #include "curl/curl.h"
 
 namespace DigitalLicenseManager {
@@ -43,9 +49,6 @@ namespace DigitalLicenseManager {
         if(!query_string.empty()) {
             url += (url.back() == '?' ? '&' + query_string : '?' + query_string);
         }
-
-        std::cout << "Request url: ";
-        std::cout << url << std::endl;
 
         curl_easy_setopt(handle, CURLOPT_URL, url.c_str());
         curl_easy_setopt(handle, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);

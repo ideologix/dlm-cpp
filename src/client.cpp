@@ -1,3 +1,9 @@
+//
+// Created by darko on 16.3.24.
+// Copyright (C) 2024 Darko Gjorgjijoski.
+// All rights reserved.
+//
+
 #include "../include/client.hpp"
 
 #include <string>
