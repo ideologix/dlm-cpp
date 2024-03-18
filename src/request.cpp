@@ -4,10 +4,8 @@
 // All rights reserved.
 //
 
-#include "../include/request.hpp"
-
-
 #define CURL_STATICLIB
+#include "../include/request.hpp"
 #include "curl/curl.h"
 
 namespace DigitalLicenseManager {
